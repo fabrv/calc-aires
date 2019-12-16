@@ -1,0 +1,173 @@
+<style>
+@font-face {
+    font-family: Montserrat;
+    src: url('https://fonts.gstatic.com/s/montserrat/v14/JTURjIg1_i6t8kCHKm45_bZF3gnD_g.woff2');
+}
+.coti {
+    padding: 20px;
+    border-radius: 3px;
+    background-color: white;
+    display: inline-block;
+    font-family: Montserrat;
+    width: 320px;
+}
+.title, .val-area, .result {
+    font-size: 14px;
+    color: #aaaaaa;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    margin-bottom: 15px;
+}
+
+.val-area {
+    margin-bottom: initial;
+    display: flex;
+}
+
+.val-area input {
+    flex: 2;
+}
+
+.val-area input, .val-area span {
+    margin: 5px;
+}
+
+.val-area span {
+    transform: translateY(10px);
+}
+
+.coti {
+    background-color: #edf1f2;
+}
+
+.coti select {
+    background-color: white;
+    border: none;
+    padding: 10px;
+    width: 100%;
+    transition: all .3s;
+    margin-bottom: 10px;
+    text-align: center;
+    color: #5a5a5a;
+    border: 1px solid #e5e7e8;
+    font-size: 14px;
+    font-family: 'Open Sans';
+}
+
+.coti select option {
+    background-color: white;
+    color: 5a5a5a;
+}
+
+.val-area input[type=number] {
+    background-color: white;
+    border: none;
+    padding: 10px;
+    transition: all .3s;
+    border: 1px solid #e5e7e8;
+}
+
+.val-area input[type=number]:focus, .val-area input[type=number]:hover {
+    outline: none;
+    box-shadow: 0px 4px 17px 0px rgba(34, 34, 34, 0.1);
+}
+
+.coti select:focus, .coti select:hover {
+    outline: none;
+    box-shadow: 0px 4px 17px 0px rgba(34, 34, 34, 0.1);
+}
+
+.coti .result {
+    text-align: center;
+    margin-top: 15px;
+    color: black;
+}
+
+.hidden {
+    display: none;
+}
+
+.sep_line {
+    letter-spacing: -3px;
+}
+
+button[type="submit"]:not(.btn), input[type="submit"]:not(.btn) {
+    background-color: #117aec;
+    text-decoration: none !important;
+    border: none;
+    color: #fff;
+    font-size: 13px;
+    padding: 10px 22px 10px;
+    font-weight: 900;
+    display: inline-block;
+    box-shadow: none !important;
+    outline: none !important;
+    text-transform: uppercase;
+    font-family: Montserrat;
+    transition: all .25s ease;
+    cursor: pointer;
+}
+
+button[type="submit"]:not(.btn):hover, input[type="submit"]:not(.btn):hover, button[type="submit"]:not(.btn):focus, input[type="submit"]:not(.btn):focus {
+    background-color: #30302f;
+    display: absolute;
+}
+
+.val-description {
+    display: inline-block;
+    width: 89px;
+}
+
+</style>
+
+<form class="coti">
+    <div class="title">
+        Calculadora
+        <span class="sep_line">---------</span>
+    </div>
+
+    <div class="val-area">
+        <span class="val-description">area mt²</span>
+        <input value="10" min="10" id="area" type="number" step="10">
+    </div>
+    <br>
+    <div class="val-area">
+        <span>personas</span>
+        <input value="2" min="0" id="people" type="number" step="4">
+    </div>
+
+    <div class="result">
+        <span>Recomendacion:</span>
+        <div>
+            <img width="300" src="https://refricentro.com.gt/wp-content/uploads/2019/12/ac-300x199.jpg">
+            <span id="recomendation"><b>100btu</b></span>
+        </div>
+    </div>
+
+    <br><br>
+    <button type="submit">Cotizar</button>
+</form>
+
+<script>
+const peopleInput = document.getElementById('people')
+const areaInput = document.getElementById('area')
+
+peopleInput.addEventListener('change', showResult)
+areaInput.addEventListener('change', showResult)
+
+function calc (people, area) {
+    const peopleBTU = people * 300
+    let areaBTU = (Math.floor(area / 10) * 10) * 600
+    areaBTU = areaBTU < 1200 ? 1200 : areaBTU
+
+    const result = peopleBTU + areaBTU
+
+    return result < 24000 ? `${result}btu` : 'Consulte con un ejecutivo'
+}
+
+function showResult () {
+    document.querySelector('#recomendation').innerHTML = calc(peopleInput.value, areaInput.value)
+}
+
+showResult()
+</script>
