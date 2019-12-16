@@ -26,7 +26,7 @@ function showResult () {
         './img/consultant.jpg'
     ]
     const result = calc(peopleInput.value, areaInput.value)
-    const img = imgs[Math.floor(((result.val * 2) / 12000) - 2)]
+    const img = imgs[Math.floor((result.val / 6000) - 2)]
 
     document.querySelector('#recomendation').innerHTML = result.caption
     document.querySelector('#reco-img').src = img
