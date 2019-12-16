@@ -28,6 +28,10 @@ function showResult () {
     const result = calc(peopleInput.value, areaInput.value)
     const img = imgs[Math.floor((result.val / 6000) - 2)]
 
+    if (result.val > 24000) {
+        document.querySelector('#btn-calc').innerHTML = 'Consultar'
+    }
+
     document.querySelector('#recomendation').innerHTML = result.caption
     document.querySelector('#reco-img').src = img
 }
